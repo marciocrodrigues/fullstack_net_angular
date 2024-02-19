@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProEventos.API", "ProEventos.API\ProEventos.API.csproj", "{112486C9-52D5-4857-8A0A-B1497CD8C089}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{112486C9-52D5-4857-8A0A-B1497CD8C089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{112486C9-52D5-4857-8A0A-B1497CD8C089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{112486C9-52D5-4857-8A0A-B1497CD8C089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{112486C9-52D5-4857-8A0A-B1497CD8C089}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A2E850C-5ECD-41FC-8041-BF24417CB9AA}
+	EndGlobalSection
+EndGlobal
