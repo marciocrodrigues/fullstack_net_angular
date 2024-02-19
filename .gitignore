@@ -3,3 +3,4 @@ node_module
 .vscode
 bin
 obj
+*.db
