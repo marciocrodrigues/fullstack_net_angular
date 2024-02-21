@@ -10,26 +10,35 @@
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
-            <th>#</th>
+            <th class="text-center">#</th>
             <th>Imagem</th>
             <th>Tema</th>
             <th>Local</th>
             <th>Data</th>
-            <th>Qtd Pessoas</th>
+            <th class="text-center">Qtd Pessoas</th>
             <th>Lote</th>
             <th>Opções</th>
         </tr>
     </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+    <tbody *ngIf="eventos && eventos.length">
+        <tr *ngFor="let evento of eventos">
+            <td class="text-center">{{evento.eventoId}}</td>
+            <td>
+                <img class="mr-3 img-64" [src]="evento.imageURL" [alt]="evento.imageURL" />
+            </td>
+            <td>{{evento.tema}}</td>
+            <td>{{evento.local}}</td>
+            <td>{{evento.dataEvento}}</td>
+            <td class="text-center">{{evento.qtdPessoas}}</td>
+            <td>{{evento.lote}}</td>
             <td></td>
         </tr>
     </tbody>
+    <tfoot *ngIf="!eventos.length">
+        <tr>
+            <td colspan="8" class="text-center">
+                <h4>Nenhum evento encontrado!</h4>
+            </td>
+        </tr>
+    </tfoot>
 </table>

@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any;
+  public eventos: any = [];
 
   constructor(
     private readonly http: HttpClient
