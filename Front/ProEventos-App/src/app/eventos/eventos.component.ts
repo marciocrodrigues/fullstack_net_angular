@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-eventos',
@@ -19,7 +20,7 @@ export class EventosComponent implements OnInit {
   }
 
   public getEventos(): void {
-    this.http.get(`https://localhost:44347/api/eventos`).subscribe(
+    this.http.get(`${environment.baseUrl}eventos`).subscribe(
       response => this.eventos = response,
       error => console.log(error)
     );
