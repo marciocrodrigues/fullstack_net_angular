@@ -25,4 +25,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProEventos.Application\ProEventos.Application.csproj" />
+  </ItemGroup>
 </Project>
