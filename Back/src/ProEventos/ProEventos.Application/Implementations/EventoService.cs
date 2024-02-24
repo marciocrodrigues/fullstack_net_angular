@@ -42,8 +42,9 @@ namespace ProEventos.Application.Implementations
         {
             try
             {
-                var evento = await _eventoPersistence.GetWithFilter(x => x.Id == eventoId).FirstOrDefaultAsync();
-                if (evento == null) return null;
+                var evento = await _eventoPersistence.GetWithFilterFull(x => x.Id == eventoId).FirstOrDefaultAsync();
+
+                if (evento is null) return null;
 
                 model.Id = evento.Id;
 
@@ -68,8 +69,9 @@ namespace ProEventos.Application.Implementations
         {
             try
             {
-                var evento = await _eventoPersistence.GetWithFilter(x => x.Id == eventoId).FirstOrDefaultAsync();
-                if (evento == null) throw new Exception("Evento para delete não foi encontrado");
+                var evento = await _eventoPersistence.GetWithFilterFull(x => x.Id == eventoId).FirstOrDefaultAsync();
+
+                if (evento is null) throw new Exception("Evento para delete não foi encontrado");
 
                 _eventoPersistence.Delete(evento);
                 return await _eventoPersistence.SaveChangesAsync();
@@ -82,6 +84,8 @@ namespace ProEventos.Application.Implementations
 
         public async Task<Evento> BuscarEventoPorId(int eventoId, bool incluirPalestrantes = false)
         {
+            if (eventoId == 0) throw new ArgumentException("Identificador do evento é obrigatorio");
+
             var queryEvento = _eventoPersistence.GetWithFilterWithoutAsNoTracking(x => x.Id == eventoId);
 
             if (incluirPalestrantes)
@@ -92,9 +96,11 @@ namespace ProEventos.Application.Implementations
 
         public async Task<IEnumerable<Evento>> BuscarEventosPorTema(string tema, bool incluirPalestrantes = false)
         {
+            if (string.IsNullOrWhiteSpace(tema)) throw new ArgumentException("Tema no evento é obrigatorio");
+
             var queryEvento = _eventoPersistence
-                .GetWithFilterWithoutAsNoTracking(x => x.Tema
-                    .Contains(tema));
+                .GetWithFilterWithoutAsNoTracking(x => x.Tema.ToLower()
+                    .Contains(tema.ToLower()));
 
             if (incluirPalestrantes)
                 queryEvento.Include(e => e.PalestrantesEventos)
@@ -106,7 +112,7 @@ namespace ProEventos.Application.Implementations
 
         public async Task<IEnumerable<Evento>> BuscarTodosEventos(bool incluirPalestrantes = false)
         {
-            var queryEvento = _eventoPersistence.GetWithFilterWithoutAsNoTracking(x => x.Id != null));
+            var queryEvento = _eventoPersistence.GetWithFilterWithoutAsNoTracking(x => x.Id != 0);
 
             if (incluirPalestrantes)
                 queryEvento.Include(e => e.PalestrantesEventos)
