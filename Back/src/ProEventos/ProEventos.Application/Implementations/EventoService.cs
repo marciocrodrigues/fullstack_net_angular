@@ -4,9 +4,6 @@ using ProEventos.Domain.Entities;
 using ProEventos.Persistence.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ProEventos.Application.Implementations
@@ -50,7 +47,7 @@ namespace ProEventos.Application.Implementations
 
                 model.Id = evento.Id;
 
-                _eventoPersistence .Update(model);
+                _eventoPersistence.Update(model);
 
                 if (await _eventoPersistence.SaveChangesAsync())
                 {
@@ -95,10 +92,13 @@ namespace ProEventos.Application.Implementations
 
         public async Task<IEnumerable<Evento>> BuscarEventosPorTema(string tema, bool incluirPalestrantes = false)
         {
-            var queryEvento = _eventoPersistence.GetWithFilterWithoutAsNoTracking(x => x.Tema.Contains(tema));
+            var queryEvento = _eventoPersistence
+                .GetWithFilterWithoutAsNoTracking(x => x.Tema
+                    .Contains(tema));
 
             if (incluirPalestrantes)
-                queryEvento.Include(e => e.PalestrantesEventos).ThenInclude(pe => pe.Palestrante);
+                queryEvento.Include(e => e.PalestrantesEventos)
+                    .ThenInclude(pe => pe.Palestrante);
 
             return await queryEvento.ToListAsync();
 
@@ -109,7 +109,8 @@ namespace ProEventos.Application.Implementations
             var queryEvento = _eventoPersistence.GetWithFilterWithoutAsNoTracking(x => x.Id != null));
 
             if (incluirPalestrantes)
-                queryEvento.Include(e => e.PalestrantesEventos).ThenInclude(pe => pe.Palestrante);
+                queryEvento.Include(e => e.PalestrantesEventos)
+                    .ThenInclude(pe => pe.Palestrante);
 
             return await queryEvento.ToListAsync();
         }
