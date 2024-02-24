@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ProEventos.API.Configs;
 using ProEventos.Persistence.ProEventos;
 
 namespace ProEventos.API
@@ -24,6 +25,8 @@ namespace ProEventos.API
             services.AddDbContext<ProEventosContext>(
                 context => context.UseSqlite(Configuration.GetConnectionString("Default"))
             );
+
+            services.InjetarDependencias();
 
             services.AddControllers();
             services.AddCors();

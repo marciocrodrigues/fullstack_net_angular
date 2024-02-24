@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProEventos.Domain.Entities;
-using ProEventos.Persistence.ProEventos;
+using ProEventos.Persistence.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProEventos.API.Controllers
 {
@@ -10,23 +11,23 @@ namespace ProEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly ProEventosContext _context;
+        private IEventoPersistence _eventoPersistence;
 
-        public EventosController(ProEventosContext context)
+        public EventosController(IEventoPersistence eventoPersistence)
         {
-            _context = context;
+            _eventoPersistence = eventoPersistence;
         }
 
         [HttpGet]
-        public IEnumerable<Evento> Get()
+        public async Task<IEnumerable<Evento>> Get()
         {
-            return _context.Eventos.ToList();
+            return await _eventoPersistence.GetWithFilter(x => x.Id != null).ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public IEnumerable<Evento> GetById(int id)
+        public async Task<IEnumerable<Evento>> GetById(int id)
         {
-            return _context.Eventos.Where(x => x.Id == id).ToList();
+            return await _eventoPersistence.GetWithFilter(x => x.Id == id).ToListAsync();
         }
 
         [HttpPost]
