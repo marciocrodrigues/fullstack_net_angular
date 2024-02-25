@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { EventoService } from '../services/evento.service';
+import { Evento } from '../models/Evento';
 
 @Component({
   selector: 'app-eventos',
@@ -9,14 +11,14 @@ import { environment } from 'src/environments/environment';
 })
 export class EventosComponent implements OnInit {
 
-  public eventos: any = [];
-  public eventosFiltrados: any = [];
+  public eventos: Evento[] = [];
+  public eventosFiltrados: Evento[] = [];
 
   exibirImagem = false;
   private _filtroLista: string = '';
 
   constructor(
-    private readonly http: HttpClient
+    private readonly eventoService: EventoService
   ) { }
 
   ngOnInit(): void {
@@ -41,11 +43,8 @@ export class EventosComponent implements OnInit {
   }
 
   public getEventos(): void {
-    this.http.get(`${environment.baseUrl}eventos`).subscribe(
-      response =>{
-        this.eventos = response;
-        this.eventosFiltrados = response;
-      },
+    this.eventoService.BuscarEventos().subscribe(
+      response => this.eventos = response,
       error => console.log(error)
     );
   }
