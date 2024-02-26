@@ -19,4 +19,12 @@ export class EventoService {
     public BuscarEventos(): Observable<Evento[]> {
         return this.http.get<Evento[]>(this.baseUrl);
     }
+
+    public BuscarEventosPorTema(tema: string): Observable<Evento[]> {
+        return this.http.get<Evento[]>(`this.baseUrl/${tema}/tema`);
+    }
+
+    public BuscarEventoPorId(id: number): Observable<Evento> {
+        return this.http.get<Evento>(`this.baseUrl/${id}`);
+    }
 }

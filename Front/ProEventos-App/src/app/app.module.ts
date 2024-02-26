@@ -1,19 +1,22 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-import localePT from '@angular/common/locales/pt';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { EventosComponent } from './eventos/eventos.component';
 import { PalestrantesComponent } from './palestrantes/palestrantes.component';
 import { NavComponent } from './nav/nav.component';
+import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-registerLocaleData(localePT);
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 
 
 @NgModule({
@@ -21,7 +24,8 @@ registerLocaleData(localePT);
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
-    NavComponent
+    NavComponent,
+    DateTimeFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -30,10 +34,10 @@ registerLocaleData(localePT);
     BrowserAnimationsModule,    
     FormsModule,
     CollapseModule.forRoot(),
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot(),
   ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'pt-br' },
-   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
