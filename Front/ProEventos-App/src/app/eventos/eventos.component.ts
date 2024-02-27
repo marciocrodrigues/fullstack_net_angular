@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { EventoService } from '../services/evento.service';
 import { Evento } from '../models/Evento';
 import { Subscription } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-eventos',
@@ -24,7 +24,9 @@ export class EventosComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly modalService: BsModalService,
-    private readonly eventoService: EventoService
+    private readonly eventoService: EventoService,
+    private readonly toastServicce: ToastrService,
+    private readonly spinnerService: NgxSpinnerService
   ) { }
   
   ngOnInit(): void {
@@ -53,13 +55,18 @@ export class EventosComponent implements OnInit, OnDestroy {
   }
 
   public getEventos(): void {
+    this.spinnerService.show();
     this.subscriptions.add(
       this.eventoService.BuscarEventos().subscribe({
           next: (eventosResp: Evento[]) => {
             this.eventos = eventosResp;
             this.eventosFiltrados = eventosResp;
           },
-          error: (error: any) => console.log(error)
+          error: (error: any) => {
+            this.spinnerService.hide()
+            this.toastServicce.error('Erro ao carregar os Eventos', 'Erro!')
+          },
+          complete: () => this.spinnerService.hide()
         })
     );
   }
