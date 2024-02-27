@@ -19,7 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 
-import { TituloComponent } from './titulo/titulo.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
