@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 
@@ -8,7 +7,9 @@
 
 @import "~@fortawesome//fontawesome-free/css/all.min.css";
 
-@import "../node_modules/bootswatch/dist/cosmo/bootstrap.min.css";
+@import "~bootswatch/dist/cosmo/variables";
+@import "~bootswatch/dist/cosmo/bootswatch";
+@import "~bootswatch/dist/cosmo/bootstrap.min.css";
 
 .img-64 {
     width: 6rem;

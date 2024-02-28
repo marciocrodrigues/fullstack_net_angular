@@ -32,7 +32,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/bootswatch/dist/cosmo/bootstrap.min.css"
             ],
             "scripts": []
           },

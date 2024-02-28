@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-titulo',
@@ -7,9 +8,21 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TituloComponent implements OnInit {
   @Input() titulo  = '';
-  constructor() { }
+  @Input() rotaLista = '';
+  @Input() subtitulo = '';
+  @Input() iconClass = '';
+  @Input() botaoListar = false;
+
+  constructor(
+    private readonly router: Router
+  ) { }
 
   ngOnInit(): void {
   }
 
+  listar(): void {
+    if (this.rotaLista !== '') {
+      this.router.navigate([`/${this.rotaLista}`])
+    }
+  }
 }
