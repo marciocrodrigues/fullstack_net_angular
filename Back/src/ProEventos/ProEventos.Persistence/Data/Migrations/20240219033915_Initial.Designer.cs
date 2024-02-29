@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProEventos.API.Data;
+using ProEventos.Persistence.ProEventos;
 
 namespace ProEventos.API.Data.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(ProEventosContext))]
     [Migration("20240219033915_Initial")]
     partial class Initial
     {
