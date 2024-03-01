@@ -1,34 +1,87 @@
 <div class="card rounded shadow-sm">
-    <form>
+    <form [formGroup]="formulario">
         <div class="p-3">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label>Tema</label>
-                    <input type="text" class="form-control" placeholder="Insira o Tema">
+                    <input formControlName="tema" 
+                        type="text" 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': validarFormulario('tema')}"
+                        placeholder="Insira o Tema">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('tema', 4, 50) }}
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-8">
                     <label>Local</label>
-                    <input type="text" class="form-control" placeholder="">
+                    <input formControlName="local"
+                        type="text"
+                        class="form-control" 
+                        [ngClass]="{'is-invalid': validarFormulario('local')}"
+                        placeholder="">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('local') }}
+                    </div>
                 </div>
                 <div class="form-group col-md-4">
                     <label>Data e Hora</label>
-                    <input type="datetime" class="form-control" placeholder="">
+                    <input formControlName="dataEvento"
+                        type="datetime"
+                        class="form-control" 
+                        [ngClass]="{'is-invalid': validarFormulario('dataEvento')}"
+                        placeholder="">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('dataEvento') }}
+                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label>Qtd Pessoas</label>
-                    <input type="text" class="form-control is-invalid" placeholder="">
+                    <input formControlName="qtdPessoas"
+                        type="text"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': validarFormulario('qtdPessoas')}"
+                        placeholder="">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('qtdPessoas') }}
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label>Telefone</label>
+                    <input formControlName="telefone"
+                        type="text"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': validarFormulario('telefone')}"
+                        placeholder="(000) 90000-0000">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('telefone') }}
+                    </div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Telefone</label>
-                    <input type="text" class="form-control" placeholder="(000) 90000-0000">
-                </div>
-                <div class="form-group col-md-6">
                     <label>Email</label>
-                    <input type="text" class="form-control" placeholder="e-mail">
+                    <input formControlName="email"
+                        type="text"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': validarFormulario('email')}"
+                        placeholder="e-mail">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('email') }}
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Imagem</label>
+                    <input formControlName="imageUrl"
+                        type="text"
+                        class="form-control"
+                        [ngClass]="{'is-invalid': validarFormulario('imageUrl')}"
+                        placeholder="imagem">
+                    <div class="invalid-feedback">
+                        {{ mensagemValidacaoFormulario('imageUrl') }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +90,7 @@
                 <button class="btn btn-outline-secondary mr-auto border">
                     Cancelar Alteração
                 </button>
-                <button class="btn btn-success">
+                <button class="btn btn-success" [disabled]="formulario.invalid">
                     <span class="spinner-border spinner-border-sm mr-1"></span>
                     Salvar Evento
                 </button>
