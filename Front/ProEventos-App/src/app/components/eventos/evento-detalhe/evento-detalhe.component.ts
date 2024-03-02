@@ -10,6 +10,10 @@ export class EventoDetalheComponent implements OnInit {
 
   public formulario!: FormGroup;
 
+  get f(): any {
+    return this.formulario.controls;
+  }
+
   constructor(
     private readonly fb: FormBuilder
   ) { }
@@ -41,12 +45,12 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public validarFormulario(campo: string): boolean | undefined | null {
-    return this.formulario.get(campo)?.errors && this.formulario.get(campo)?.touched;
+    return this.f[campo]?.errors && this.f[campo]?.touched;
   }
 
-  public mensagemValidacaoFormulario(campo: string, min: number = 0, max: number = 0): string {
-    var campoForm = this.formulario.get(campo);
-    var nomeCampo = `${campo[0].toUpperCase()}${campo.slice(1, campo.length)}`;
+  public mensagemValidacaoFormulario(campo: string, min: number = 0, max: number = 0, descricao: string = ''): string {
+    var campoForm = this.f[campo];
+    var nomeCampo = `${descricao ? descricao : campo[0].toUpperCase()}${campo.slice(1, campo.length)} `;
 
     if (campoForm?.hasError('required')) {
       return `${nomeCampo} é obrigatório`;
@@ -58,6 +62,14 @@ export class EventoDetalheComponent implements OnInit {
 
     if (campoForm?.hasError('minlength') && min > 0) {
       return `${nomeCampo} deve ter no minimo ${min} caracteres`;
+    }
+
+    if (campoForm?.hasError('max') && max > 0) {
+      return `${nomeCampo} deve ser menor ou igual a ${max}`;
+    }
+
+    if (campoForm?.hasError('email')) {
+      return `${nomeCampo} deve ser um e-mail valido`;
     }
 
     return '';
