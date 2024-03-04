@@ -6,7 +6,7 @@
 ></app-titulo>
 
 <div class="card rounded shadow-sm">
-	<form>
+	<form [formGroup]="formulario">
 		<div class="row p-3">
 			<div class="col-lg-3 pt-1">
 				<div class="card mb-3">
@@ -50,49 +50,97 @@
 					</div>
 					<div class="form-group col">
 						<label>Título</label>
-						<select class="form-control">
+						<select 
+							formControlName="titulo"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('titulo')}"
+						>
 							<option value=""></option>
 							<option value="0">Não Quero</option>
-							<option value="Senhorita">Tecnólogo(a)</option>
-							<option value="Senhorita">Bacharel</option>
-							<option value="Senhorita">Especialista</option>
-							<option value="Senhorita">Pós Graduado(a)</option>
-							<option value="Senhorita">Mestre</option>
-							<option value="Senhorita">Doutor(a)</option>
-							<option value="Senhorita">Pós Doc</option>
+							<option value="1">Tecnólogo(a)</option>
+							<option value="2">Bacharel</option>
+							<option value="3">Especialista</option>
+							<option value="4">Pós Graduado(a)</option>
+							<option value="5">Mestre</option>
+							<option value="6">Doutor(a)</option>
+							<option value="7">Pós Doc</option>
 						</select>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('primeiroNome', 0, 0, 'Título') }}
+						</div>						
 					</div>
 					<div class="form-group col-sm-5">
 						<label>Primeiro Nome</label>
-						<input type="text" class="form-control"/>
+						<input
+							formControlName="primeiroNome"
+							type="text"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('primeiroNome')}"/>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('primeiroNome', 0, 0, 'Primeiro Nome') }}
+						</div>
 						
 					</div>
 					<div class="form-group col-sm-5">
 						<label>Último nome</label>
-						<input type="text" class="form-control"/>
+						<input
+							formControlName="ultimoNome"
+							type="text"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('ultimoNome')}"/>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('ultimoNome', 0, 0, 'Último nome') }}
+						</div>
 						
 					</div>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-sm-5">
 						<label>E-mail</label>
-						<input type="text" class="form-control" />
+						<input
+							formControlName="email"
+							type="text"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('email')}"/>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('email', 0, 0) }}
+						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label>Telefone</label>
-						<input type="text" class="form-control" />
+						<input
+							formControlName="telefone"
+							type="text"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('telefone')}"/>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('telefone', 0, 0) }}
+						</div>
 					</div>
 					<div class="form-group col-sm">
 						<label>Função</label>
-						<select class="form-control">
+						<select
+							formControlName="funcao"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('funcao')}">
 							<option value=""></option>
-							<option value="Participante">Participante</option>
-							<option value="Palestrante">Palestrante</option>
+							<option value="participante">Participante</option>
+							<option value="palestrante">Palestrante</option>
 						</select>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('funcao', 0, 0, 'Função') }}
+						</div>
 					</div>
 					<form-group class="col-12">
 						<label>Descrição</label>
-						<input type="text" class="form-control" />
+						<input
+							formControlName="descricao"
+							type="text"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('descricao')}"/>
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('descricao', 0, 0, 'Descrição') }}
+						</div>
 					</form-group>
 				</div>
 				<div>
@@ -102,11 +150,27 @@
 				<div class="form-row">
 					<div class="form-group col-sm">
 						<label>Senha</label>
-						<input type="password" class="form-control" />
+						<input
+							formControlName="senha"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('senha')}"
+							type="password"
+							placeholder="Confirme a Senha" />
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('senha', 6, 0) }}
+						</div>
 					</div>
 					<div class="form-group col-sm">
 						<label>Confirmar Senha</label>
-						<input type="password" class="form-control" />
+						<input
+							formControlName="confirmeSenha"
+							class="form-control"
+							[ngClass]="{'is-invalid': validarFormulario('confirmeSenha')}"
+							type="password"
+							placeholder="Confirme a Senha" />
+						<div class="invalid-feedback">
+							{{ mensagemValidacaoFormulario('confirmeSenha', 6, 0, 'Confirmar Senha') }}
+						</div>
 					</div>
 				</div>
 			</div>

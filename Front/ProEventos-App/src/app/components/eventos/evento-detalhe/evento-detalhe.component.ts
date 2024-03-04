@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormularioHelper } from '@app/helpers/FormularioHelper';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -45,34 +46,17 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public validarFormulario(campo: string): boolean | undefined | null {
-    return this.f[campo]?.errors && this.f[campo]?.touched;
+    return FormularioHelper.validarFormulario(this.f[campo]);
   }
 
   public mensagemValidacaoFormulario(campo: string, min: number = 0, max: number = 0, descricao: string = ''): string {
-    var campoForm = this.f[campo];
-    var nomeCampo = `${descricao ? descricao : campo[0].toUpperCase()}${campo.slice(1, campo.length)} `;
-
-    if (campoForm?.hasError('required')) {
-      return `${nomeCampo} é obrigatório`;
-    }
-
-    if (campoForm?.hasError('maxlength') && max > 0) {
-      return `${nomeCampo} deve ter no maximo ${max} caracteres`;
-    }
-
-    if (campoForm?.hasError('minlength') && min > 0) {
-      return `${nomeCampo} deve ter no minimo ${min} caracteres`;
-    }
-
-    if (campoForm?.hasError('max') && max > 0) {
-      return `${nomeCampo} deve ser menor ou igual a ${max}`;
-    }
-
-    if (campoForm?.hasError('email')) {
-      return `${nomeCampo} deve ser um e-mail valido`;
-    }
-
-    return '';
+    return FormularioHelper.mensagemValidacaoFormulario(
+      this.f[campo],
+      campo,
+      min,
+      max,
+      descricao
+    );
   }
 
 }
