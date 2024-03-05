@@ -1,4 +1,4 @@
-﻿using ProEventos.Domain.Entities;
+﻿using ProEventos.Application.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,11 +6,11 @@ namespace ProEventos.Application.Interfaces
 {
     public interface IEventoService
     {
-        Task<Evento> AddEventos(Evento model);
-        Task<Evento> UpdateEvento(int eventoId, Evento model);
+        Task<EventoDto> AddEventos(EventoDto model);
+        Task<EventoDto> UpdateEvento(int eventoId, EventoDto model);
         Task<bool> Delete(int eventoId);
-        Task<IEnumerable<Evento>> BuscarTodosEventos(bool incluirPalestrantes = false);
-        Task<IEnumerable<Evento>> BuscarEventosPorTema(string tema, bool incluirPalestrantes = false);
-        Task<Evento> BuscarEventoPorId(int eventoId, bool incluirPalestrantes = false);
+        Task<IEnumerable<EventoDto>> BuscarTodosEventos(bool incluirPalestrantes = false);
+        Task<IEnumerable<EventoDto>> BuscarEventosPorTema(string tema, bool incluirPalestrantes = false);
+        Task<EventoDto> BuscarEventoPorId(int eventoId, bool incluirPalestrantes = false);
     }
 }

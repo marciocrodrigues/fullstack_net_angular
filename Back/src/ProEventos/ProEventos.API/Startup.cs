@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProEventos.API.Configs;
 using ProEventos.Persistence.ProEventos;
+using System;
 
 namespace ProEventos.API
 {
@@ -31,6 +32,7 @@ namespace ProEventos.API
                 .AddNewtonsoftJson(x => 
                     x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                  );
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddCors();
             services.AddSwaggerGen(c =>
             {
