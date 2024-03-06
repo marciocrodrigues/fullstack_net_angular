@@ -32,7 +32,7 @@ namespace ProEventos.Application.Implementations
                 if (await _eventoPersistence.SaveChangesAsync())
                 {
                     var retorno = await _eventoPersistence
-                        .GetWithFilterWithoutAsNoTracking(x => x.Id == model.Id)
+                        .GetWithFilterWithoutAsNoTracking(x => x.Id == eventoEntity.Id)
                         .FirstOrDefaultAsync();
 
                     return _mapper.Map<EventoDto>(retorno);
@@ -50,18 +50,18 @@ namespace ProEventos.Application.Implementations
         {
             try
             {
-                var evento = await _eventoPersistence.GetWithFilterFull(x => x.Id == eventoId).FirstOrDefaultAsync();
+                var eventoEntity = await _eventoPersistence.GetWithFilterFull(x => x.Id == eventoId).FirstOrDefaultAsync();
 
-                var eventoEntity = _mapper.Map<Evento>(model);
+                if (eventoEntity is null) return null;
 
-                if (evento is null) return null;
+                _mapper.Map(model, eventoEntity);
 
                 _eventoPersistence.Update(eventoEntity);
 
                 if (await _eventoPersistence.SaveChangesAsync())
                 {
                     var retorno = await _eventoPersistence
-                        .GetWithFilterWithoutAsNoTracking(x => x.Id == model.Id)
+                        .GetWithFilterWithoutAsNoTracking(x => x.Id == eventoEntity.Id)
                         .FirstOrDefaultAsync();
 
                     return _mapper.Map<EventoDto>(retorno);
