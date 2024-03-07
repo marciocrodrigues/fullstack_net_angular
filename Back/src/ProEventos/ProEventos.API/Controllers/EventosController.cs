@@ -25,7 +25,7 @@ namespace ProEventos.API.Controllers
             {
                 var result = await _eventoService.BuscarTodosEventos(true);
 
-                if (result is null) return NotFound("Nenhum registro encontrado");
+                if (result is null) return NoContent();
 
                 return Ok(result);
             }
@@ -42,7 +42,7 @@ namespace ProEventos.API.Controllers
             {
                 var result = await _eventoService.BuscarEventoPorId(id, true);
 
-                if (result is null) return NotFound("Nenhum registro encontrado");
+                if (result is null) return NoContent();
 
                 return Ok(result);
             }
@@ -59,7 +59,7 @@ namespace ProEventos.API.Controllers
             {
                 var result = await _eventoService.BuscarEventosPorTema(tema, true);
 
-                if (result is null) return NotFound("Nenhum registro encontrado");
+                if (result is null) return NoContent();
 
                 return Ok(result);
             }
