@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { FormularioHelper } from '@app/helpers/FormularioHelper';
 
 @Component({
@@ -10,14 +11,31 @@ import { FormularioHelper } from '@app/helpers/FormularioHelper';
 export class EventoDetalheComponent implements OnInit {
 
   public formulario!: FormGroup;
+  private id!: number;
+
+  get bsConfig(): any {
+    return {
+      isAnimated: true,
+      adaptivePosition: true,
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      containerClass: 'theme-default',
+      showWeekNumbers: false
+    }
+  };
 
   get f(): any {
     return this.formulario.controls;
   }
 
   constructor(
-    private readonly fb: FormBuilder
-  ) { }
+    private readonly fb: FormBuilder,
+    private readonly activeRoute: ActivatedRoute
+  ) { 
+    this.activeRoute.params.subscribe((params) => {
+      this.id = params.id;
+    });
+    console.log(this.id)
+  }
 
   ngOnInit(): void {
     this.iniciarFormulario();

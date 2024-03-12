@@ -59,7 +59,7 @@
                 <td class="text-center">{{evento.id}}</td>
                 <td>{{evento.tema}}</td>
                 <td class="d-none d-md-table-cell">{{evento.local}}</td>
-                <td>{{evento.dataEvento | DateTimeFormat}}</td>
+                <td>{{evento.dataEvento ? (evento.dataEvento | DateTimeFormat) : ''}}</td>
                 <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
                 <td class="d-none d-md-table-cell"></td>
                 <td>

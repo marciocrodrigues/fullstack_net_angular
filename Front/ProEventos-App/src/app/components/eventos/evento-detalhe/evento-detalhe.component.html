@@ -32,6 +32,8 @@
                         type="datetime"
                         class="form-control" 
                         [ngClass]="{'is-invalid': validarFormulario('dataEvento')}"
+                        bsDatepicker
+                        [bsConfig]="bsConfig"
                         placeholder="">
                     <div class="invalid-feedback">
                         {{ mensagemValidacaoFormulario('dataEvento', 0, 0, 'Data e Hora') }}
