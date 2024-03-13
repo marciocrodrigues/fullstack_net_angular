@@ -21,10 +21,10 @@ export class EventoService {
     }
 
     public BuscarEventosPorTema(tema: string): Observable<Evento[]> {
-        return this.http.get<Evento[]>(`this.baseUrl/${tema}/tema`);
+        return this.http.get<Evento[]>(`${this.baseUrl}/${tema}/tema`);
     }
 
     public BuscarEventoPorId(id: number): Observable<Evento> {
-        return this.http.get<Evento>(`this.baseUrl/${id}`);
+        return this.http.get<Evento>(`${this.baseUrl}/${id}`);
     }
 }

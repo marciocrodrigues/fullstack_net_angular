@@ -19,6 +19,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { TituloComponent } from './shared/titulo/titulo.component';
 
@@ -30,7 +31,9 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
+import { defineLocale } from 'ngx-bootstrap/chronos';
 
+defineLocale('pt-br', ptBrLocale);
 
 
 @NgModule({

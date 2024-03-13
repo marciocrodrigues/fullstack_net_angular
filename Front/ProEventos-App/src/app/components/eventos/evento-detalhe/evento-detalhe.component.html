@@ -32,6 +32,7 @@
                         type="datetime"
                         class="form-control" 
                         [ngClass]="{'is-invalid': validarFormulario('dataEvento')}"
+                        value="{{ evento.dataEvento | DateTimeFormat }}"
                         bsDatepicker
                         [bsConfig]="bsConfig"
                         placeholder="">
@@ -76,13 +77,13 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Imagem</label>
-                    <input formControlName="imageUrl"
+                    <input formControlName="imageURL"
                         type="text"
                         class="form-control"
-                        [ngClass]="{'is-invalid': validarFormulario('imageUrl')}"
+                        [ngClass]="{'is-invalid': validarFormulario('imageURL')}"
                         placeholder="imagem">
                     <div class="invalid-feedback">
-                        {{ mensagemValidacaoFormulario('imageUrl') }}
+                        {{ mensagemValidacaoFormulario('imageURL') }}
                     </div>
                 </div>
             </div>
