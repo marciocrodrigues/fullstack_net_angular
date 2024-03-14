@@ -93,7 +93,7 @@
                 <button class="btn btn-outline-secondary mr-auto border">
                     Cancelar Alteração
                 </button>
-                <button class="btn btn-success" [disabled]="formulario.invalid">
+                <button class="btn btn-success" [disabled]="formulario.invalid" (click)="salvar()">
                     <span class="spinner-border spinner-border-sm mr-1"></span>
                     Salvar Evento
                 </button>

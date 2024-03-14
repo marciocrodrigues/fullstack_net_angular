@@ -63,7 +63,7 @@
                 <td class="d-none d-md-table-cell">{{evento.qtdPessoas}}</td>
                 <td class="d-none d-md-table-cell"></td>
                 <td>
-                    <button class="btn btn-danger btn-lg mr-2" tooltip="Excluir" (click)="openModal(template)">
+                    <button class="btn btn-danger btn-lg mr-2" tooltip="Excluir" (click)="openModal($event,template, evento.id)">
                         <i class="fa fa-trash"></i>
                     </button>
                 </td>
@@ -82,7 +82,7 @@
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <p>Tem certeza que quer deletar este Evento?</p>
+    <p>Tem certeza que quer deletar este Evento de Código {{ this.eventoId }}?</p>
     <button type="button" class="btn btn-default" (click)="excluir()" >Sim</button>
     <button type="button" class="btn btn-primary" (click)="cancelar()" >Não</button>
   </div>

@@ -110,7 +110,7 @@ namespace ProEventos.API.Controllers
             {
                 var deleted = await _eventoService.Delete(id);
 
-                if (deleted) return NoContent();
+                if (deleted) return Ok(new { message = "Deletado" });
 
                 return BadRequest("Não foi possivel excluir o evento");
             }

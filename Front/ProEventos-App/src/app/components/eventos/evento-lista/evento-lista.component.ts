@@ -18,6 +18,7 @@ export class EventoListaComponent implements OnInit {
 
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+  public eventoId = 0;
 
   public exibirImagem = false;
   private filtroListado = '';
@@ -78,12 +79,33 @@ export class EventoListaComponent implements OnInit {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public openModal(template: TemplateRef<any>) {
+  public openModal(event: any, template: TemplateRef<any>, eventoId: number) {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }
 
   public excluir() {
     this.modalRef?.hide();
+    this.spinnerService.show();
+    this.subscriptions.add(
+      this.eventoService.deleteEvento(this.eventoId).subscribe({
+        next: (result: any) => {
+          if (result) {
+            this.toastServicce.success("Evento removido com sucesso", "Deletado!");
+            this.spinnerService.hide();
+            this.getEventos();
+          }
+        },
+        error: (error: any) => {
+          this.spinnerService.hide();
+          this.toastServicce.error("Erro ao deletar evento!", "Erro!");
+        },
+        complete: () => {
+          this.spinnerService.hide();
+        }
+      })
+    );
   }
 
   public cancelar() {

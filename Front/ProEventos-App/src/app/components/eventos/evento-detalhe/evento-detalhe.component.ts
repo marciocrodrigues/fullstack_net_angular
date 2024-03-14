@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormularioHelper } from '@app/helpers/FormularioHelper';
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/services/evento.service';
@@ -39,6 +39,7 @@ export class EventoDetalheComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly activeRoute: ActivatedRoute,
+    private readonly router: Router,
     private localeService: BsLocaleService,
     private readonly eventoService: EventoService,
     private readonly toastServicce: ToastrService,
@@ -122,6 +123,32 @@ export class EventoDetalheComponent implements OnInit, OnDestroy {
       max,
       descricao
     );
+  }
+
+  public salvar() {
+    if (this.formulario.invalid)
+      return;
+
+      this.spinnerService.show();
+
+      this.subscriptions.add(
+        this.eventoService.postEvento(this.formulario.getRawValue()).subscribe({
+          next: (eventoResp: Evento) => {
+            if (eventoResp) {
+              this.spinnerService.hide();
+              this.toastServicce.success("Evento cadastrado com sucesso", "Cadastro!");
+              this.router.navigate([`/eventos/lista`]);
+            }
+          },
+          error: (error: any) => {
+            this.spinnerService.hide();
+            this.toastServicce.error("Erro ao cadastrar evento!", "Erro!");
+          },
+          complete: () => {
+            this.spinnerService.hide();
+          }
+        })
+      )
   }
 
 }
